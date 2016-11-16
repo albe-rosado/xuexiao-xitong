@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_turbolinks import turbolinks
 
 app = Flask(__name__)
 # Loads the config 
@@ -12,6 +13,7 @@ bootstrap = Bootstrap(app)
 mail = Mail(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
+turbolinks(app)
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 

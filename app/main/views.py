@@ -18,5 +18,8 @@ def index():
 
 @main.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
+    return render_template('dashboard/home.html')
 
-    return render_template('dashboard/main.html')
+@main.route('/dashboard/pay', methods=['GET', 'POST'])
+def pay():
+    return render_template('dashboard/pay.html')
