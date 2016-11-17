@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}数学科学学院系统{% endblock %}
+{% block title %}选手首页{% endblock %}
 
 {% block head %}    
 {{ super() }}
@@ -8,16 +8,28 @@
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/dashboard-styles.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/material.min.css') }}" rel="stylesheet">
-    <link href="https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css" rel="stylesheet">
-    <script src="{{url_for('static', filename='js/material.min.js')}}"></script> 
-
+    <link href="{{ url_for('static', filename='css/big-css.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/dialog-polyfill.css') }}" rel="stylesheet">
+    
+    <script src="{{url_for('static', filename='js/material.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/dialog-polyfill.js')}}"></script>
 {% endblock %}
 
 {% block content %}
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title"> <!-- Dynamic links --> </span>
+            <span class="mdl-layout-title"> 
+                {{ template_name }}            
+            </span>
+            <span>
+                {% for message in get_flashed_messages() %}
+                    <h4 style="color: red; padding: 40px;">    
+                        {{ message }}  
+                    </h4>  
+                {% endfor %}     
+            </span>
+            
           <div class="mdl-layout-spacer"></div>         
         </div>
       </header>
@@ -25,7 +37,7 @@
         <header class="demo-drawer-header">
             <img src="{{ url_for('static', filename='img/user.jpg') }}" class="demo-avatar">            
             <div class="demo-avatar-dropdown">
-            <span> 欢迎 ... </span>
+            <span> 欢迎 {{ current_user.username }} </span>
             <div class="mdl-layout-spacer"></div>
             <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
                 <i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -39,7 +51,8 @@
             </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-            <a class="mdl-navigation__link" href=""><i class="material-icons">payment</i> 网上缴费 </a>
+            <a class="mdl-navigation__link" href="/dashboard"><i class="material-icons">home</i> 选手首页 </a>
+            <a class="mdl-navigation__link" href="/dashboard/pay"><i class="material-icons">payment</i> 网上缴费 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">receipt</i> 订单管理 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">file_download</i> 下载试题 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">fingerprint</i> 提交识别码 </a>

@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from . import main
-from ..auth.forms import LoginForm
+from ..auth.forms import LoginForm, ChangePasswordForm, ChangeEmailForm
 from ..models import User
 from ..email import send_email
 
@@ -18,8 +18,11 @@ def index():
 
 @main.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    return render_template('dashboard/home.html')
+    template_name='选手首页'
+    return render_template('dashboard/home.html', template_name=template_name)
 
 @main.route('/dashboard/pay', methods=['GET', 'POST'])
 def pay():
-    return render_template('dashboard/pay.html')
+    template_name='网上缴费'
+    flash("还没有缴费平台")
+    return render_template('dashboard/pay.html', template_name=template_name)

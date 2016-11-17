@@ -10,6 +10,19 @@
       z-index: 900;
 }
 
+color--blue-grey-800 {
+    background-color: #78C0E0 !important;
+}
+
+td {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+.navbar{
+  background-color: blue;
+}
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
@@ -102,7 +115,7 @@ html, body {
 }
 .demo-navigation .mdl-navigation__link .material-icons {
   font-size: 24px;
-  color: rgba(255, 255, 255, 0.56);
+  color: black;
   margin-right: 32px;
 }
 

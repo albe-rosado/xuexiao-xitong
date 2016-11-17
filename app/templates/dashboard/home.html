@@ -1,5 +1,151 @@
 {% extends "dashboard/dashboard_base.html" %}
 
 {% block page_content %}
-    <p>Dashboard Home</p>
+<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+    <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">MD5软件下载</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        MD5校验工具：
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://pan.baidu.com/s/1nvi42MH" target="_blank">
+            点击下载
+        </a>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect dialog-button">
+            工具说明
+        </a>
+    </div>
+</div>
+
+<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+    <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">资料管理</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        资料： 【【 status of the document 】】
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <a href="/auth/change-password" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            密码
+        </a>
+        <a href="/auth/change-email" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            邮箱
+        </a>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            编辑资料
+        </a>
+    </div>
+</div>
+<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+    <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">网上缴费</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        参赛队 [[status]] 缴费方为：参赛队缴费 支付时间为：2016-09-08 17:40:24
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <a href="/dashboard/pay" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            网上缴费
+        </a>
+    </div>
+</div>
+
+<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col" style="padding: 10px;">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">竞赛相关</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        【 status of the document 】
+    </div>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 150px; padding: 3px;">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        下载试题
+                    </button>
+                </td>
+                <td style="width: 800px;padding: 3px;"> 下载试题时间：2016-09-15 08:00:00 至 2016-09-20 12:00:00 </td>             
+            </tr>
+            <tr>
+                <td style="width: 150px; padding: 3px;">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        试题解压码
+                    </button>
+                </td>
+                <td style="width: 800px;padding: 3px;"> 获取试题解压码时间：2016-09-16 08:00:00 至 2016-09-20 12:00:00 尚未公布 </td> 
+            </tr>
+            <tr>
+                <td style="width: 150px; padding: 3px;">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        提交识别码
+                    </button>
+                </td>
+                <td style="width: 800px;padding: 3px;"> 上传识别码时间：2016-09-16 08:00:00 至 2016-09-20 12:06:00 </td> 
+            </tr>
+            <tr>
+                <td style="width: 150px; padding: 3px;">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        上传论文
+                    </button>
+                </td>
+                <td style="width: 800px;padding: 3px;"> 上传论文时间：2016-09-20 12:30:00 至 2016-09-23 12:00:00 </td> 
+            </tr>
+            <tr>
+                <td style="width: 150px; padding: 3px;">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        查看论文
+                    </button>
+                </td>
+                <td style="width: 800px;padding: 3px;"> 查看论文时间：2016-11-16 12:00:00 至 2016-11-26 12:00:00 </td> 
+            </tr>
+        </tbody>
+</table>
+</div>
+
+<!-- MD5 manual dialog -->
+<dialog id="dialog" class="mdl-dialog">
+  <div class="mdl-dialog__content">
+    
+    <h4> 什么是MD5码？</h4>
+    <p>
+        MD5码是message-digest algorithm 5（信息-摘要算法）的缩写，被广泛用于加密和解密技术上， 它可以说是文件的“数字指纹”。任何一个文件，无论是可执行程序、图像文件、临时文件或者其他任何类型的文件， 也不管它体积多大，都有且只有一个独一无二的MD5信息码，并且如果这个文件被修改过，它的MD5码也将随之改变。
+    </p>    
+
+    <h4> MD5码有什么用？</h4>
+    <p>
+        我们可以通过对比同一文件的MD5码，来校验这个文件是否被“篡改”过。当比赛开始前， 我们下载了试题压缩包后，如果想知道下载的这个试题和全国研究生数模竞赛官方网站的原始文件是否一模一样， 就可以给自己下载的文件做个MD5码校验。
+    </p>     
+
+    <h4>MD5码如何使用？</h4>
+    <p>
+       下载官方提供的MD5码校验工具，运行MD5码校验工具，点浏览指定所要检查的文件，选择后软件将自动计算文件的MD5码， 检查生成的MD5码是否与全国研究生数模竞赛官方网站提供的相同，如果得到的MD5码和官方网站公布的相同，可确认所下载的文件是完整且正确的。 如果MD5码和官方网站公布的不同，说明你下载的文件不完整或在网络下载的过程中出现错误，请您重新下载；也有可能该文件已被别人修改， 为防止他人更改该文件时放入病毒或木马，请不要使用该压缩包，而需要重新下载。同样，在比赛结束时，我们要求参赛队先提交论文PDF文件的MD5码， 一旦该MD5提交成功，之后的提交PDF论文，就必须使用用来生成该MD5的论文PDF文件进行提交，否则会出现MD5码不匹配的现象，导致无法正常参与后续论文评审工作。 
+    </p>    
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button">关闭</button>
+  </div>
+</dialog>
+
+
+  <script>
+  (function() {
+    'use strict';
+    var dialogButton = document.querySelector('.dialog-button');
+    var dialog = document.querySelector('#dialog');
+    if (! dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    dialogButton.addEventListener('click', function() {
+       dialog.showModal();
+    });
+    dialog.querySelector('button:not([disabled])')
+    .addEventListener('click', function() {
+      dialog.close();
+    });
+  }());
+  </script>
+
+
 {% endblock %}
