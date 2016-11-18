@@ -2,7 +2,6 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
 SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 MAIL_SERVER = 'debugmail.io'
@@ -18,3 +17,11 @@ FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
 SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
+
+ # Storage Config
+STORAGE_PROVIDER = "LOCAL"
+STORAGE_CONTAINER = os.path.join(basedir,'app/files/')
+STORAGE_KEY = ""
+STORAGE_SECRET = ""
+STORAGE_SERVER = True
+# STORAGE_SERVER_URL = "./files" # The url endpoint to access files on LOCAL provider

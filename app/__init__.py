@@ -4,11 +4,16 @@ from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_turbolinks import turbolinks
+from flask_cloudy import Storage
 
 app = Flask(__name__)
 # Loads the config 
 app.config.from_object('config')
 
+# Setup storage
+storage = Storage()
+storage.init_app(app)
+#
 bootstrap = Bootstrap(app)
 mail = Mail(app)
 db = SQLAlchemy(app)

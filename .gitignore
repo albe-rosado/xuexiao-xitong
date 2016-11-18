@@ -3,3 +3,4 @@ app/__pycache__
 .idea
 data.sqlite
 config.py
+app/config.py

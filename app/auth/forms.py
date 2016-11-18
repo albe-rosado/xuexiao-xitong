@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import Required, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
 from ..models import User
@@ -69,3 +69,9 @@ class ChangeEmailForm(Form):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('邮箱已被注册')
+
+class ContactForm(Form):
+    purpose = SelectField('留言类型', choices=[('aim','赛事信息'), ('msn','参赛咨询'), ('msn1','队员信息填写'),\
+     ('msn2','审核与缴费'), ('msn3','试题下载'), ('msn4','论文提交'), ('msn5','证书及奖金领取'), ('msn6','其它')])
+    message = TextAreaField('内容', validators=[Required()])
+    submit = SubmitField('提交')

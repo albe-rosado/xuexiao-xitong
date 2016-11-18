@@ -5,7 +5,8 @@ from .. import db
 from ..models import User
 from ..email import send_email
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
-    PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
+    PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm,\
+    ContactForm 
 
 
 @auth.before_app_request
@@ -156,3 +157,9 @@ def change_email(token):
     else:
         flash('Invalid request.')
     return redirect(url_for('main.index'))
+
+@auth.route('/contact')
+@login_required
+def contact():
+    form = ContactForm()
+    return render_template('auth/contact.html', form=form)
