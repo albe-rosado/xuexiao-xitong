@@ -1,6 +1,9 @@
 app/main/__pycache__
 app/__pycache__
 .idea
+*.pyc
 data.sqlite
 config.py
 app/config.py
+app/files
+app/__init__.pyc
