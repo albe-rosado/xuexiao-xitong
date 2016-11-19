@@ -158,8 +158,14 @@ def change_email(token):
         flash('Invalid request.')
     return redirect(url_for('main.index'))
 
-@auth.route('/contact')
+@auth.route('/contact', methods=['GET', 'POST'])
 @login_required
 def contact():
     form = ContactForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            send_email('admin@site.com', 'User %s has sent you a message about %s' % (current_user.username, form.purpose.data), 'auth/email/contact', content=form.message.data)
+            flash('Message sent!')
+        else:
+            flash('Sorry, try again...')
     return render_template('auth/contact.html', form=form)
