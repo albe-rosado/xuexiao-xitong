@@ -6,12 +6,15 @@ from . import db, login_manager
 
 
 class User(UserMixin, db.Model):
-    
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, unique=True, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+    fee_payed = db.Column(db.String(64), default='False')
+    team_registered = db.Column(db.Boolean, default=False)
+    role = db.Column(db.String(64), default='team')
 
     @property
     def password(self):
@@ -84,3 +87,27 @@ class User(UserMixin, db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+class Member(db.Model):
+    __tablename__ = 'members'    
+    group_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    phone = db.Column(db.String(164), unique=True, index=True)
+    email = db.Column(db.String(164), unique=True, index=True)
+    name = db.Column(db.String(164))
+    student_number = db.Column(db.String(164))
+    sex = db.Column(db.String(164))
+    ethnic = db.Column(db.String(164))
+    student_type = db.Column(db.String(164))
+    province = db.Column(db.String(164))
+    school = db.Column(db.String(164))
+    discipline = db.Column(db.String(614))
+    specialty = db.Column(db.String(164))
+    grade =db.Column(db.String(164))
+    faculty = db.Column(db.String(164))
+    grad_time = db.Column(db.String(64))
+    teacher_assigned = db.Column(db.String(64))
+    id_type = db.Column(db.String(64))
+    id_number = db.Column(db.String(64), unique=True, index=True, primary_key=True)
+    address = db.Column(db.String(164))
+    zip_code = db.Column(db.String(164))

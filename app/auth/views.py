@@ -4,6 +4,7 @@ from . import auth
 from .. import db
 from ..models import User
 from ..email import send_email
+
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
     PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm,\
     ContactForm 
@@ -26,9 +27,8 @@ def unconfirmed():
 
 
 @auth.route('/login')
-def login():    
-    form = LoginForm()
-    return render_template('index.html', form=form)
+def login():
+    return redirect(url_for('main.index'))
 
 
 @auth.route('/logout')
@@ -52,15 +52,15 @@ def register():
         send_email(user.email, 'Confirm Your Account',
                    'auth/email/confirm', user=user, token=token)
         flash('A confirmation email has been sent to you by email.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('main.index'))
     return render_template('auth/register.html', form=form)
 
 
-@auth.route('/confirm/<token>')
+@auth.route('/confirm/<token>', methods=['GET', 'POST'])
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.dashboard'))
     if current_user.confirm(token):
         flash('You have confirmed your account. Thanks!')
     else:
@@ -95,7 +95,7 @@ def password_reset_request():
                        next=request.args.get('next'))
         flash('An email with instructions to reset your password has been '
               'sent to you.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('main.index'))
     return render_template('auth/reset_password.html', form=form)
 
 
@@ -110,7 +110,7 @@ def password_reset(token):
             return redirect(url_for('main.index'))
         if user.reset_password(token, form.password.data):
             flash('Your password has been updated.')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('main.index'))
         else:
             return redirect(url_for('main.index'))
     return render_template('auth/reset_password.html', form=form)

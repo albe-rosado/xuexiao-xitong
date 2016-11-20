@@ -16,47 +16,42 @@
 {% endblock %}
 
 {% block content %}
+    <!-- message flashing * NEED A FIX! *--> 
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-        <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title"> 
-                {{ template_name }}            
-            </span>
-            <span>
-                {% for message in get_flashed_messages() %}
-                    <h4 style="color: red; padding: 40px;">    
-                        {{ message }}  
-                    </h4>  
-                {% endfor %}     
-            </span>
-            
-          <div class="mdl-layout-spacer"></div>         
-        </div>
-      </header>
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title"> 
+                    {{ template_name }}            
+                </span>           
+            <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="{{url_for('auth.logout')}}">退出登录</a>
+                </nav>         
+            </div>
+        </header>
         <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
-            <img src="{{ url_for('static', filename='img/user.jpg') }}" class="demo-avatar">            
-            <div class="demo-avatar-dropdown">
-            <span> 欢迎 {{ current_user.username }} </span>
-            <div class="mdl-layout-spacer"></div>
-            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-                <i class="material-icons" role="presentation">arrow_drop_down</i>
-                <span class="visuallyhidden">Accounts</span>
-            </button>
-            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-                <li class="mdl-menu__item">编辑资料</li>
-                <li class="mdl-menu__item">密码/邮箱</li>
-                <li class="mdl-menu__item">退出登录</li>                
-            </ul>
+            <img src="{{ url_for('static', filename='img/user.jpg') }}" class="demo-avatar">        
+            <br>    
+            <div class="demo-avatar-dropdown">            
+            <span> 欢迎您： {{ current_user.username }}, 队号： {{current_user.id}} </span>
+            <div class="mdl-layout-spacer"></div>            
             </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
             <a class="mdl-navigation__link" href="{{ url_for('main.dashboard') }}"><i class="material-icons">home</i> 选手首页 </a>
-            <a class="mdl-navigation__link" href="/dashboard/pay"><i class="material-icons">payment</i> 网上缴费 </a>
+            <a class="mdl-navigation__link" href="{{ url_for('main.pay') }}"><i class="material-icons">payment</i> 网上缴费 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">receipt</i> 订单管理 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">file_download</i> 下载试题 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">fingerprint</i> 提交识别码 </a>
-            <a class="mdl-navigation__link" href="/dashboard/upload"><i class="material-icons">file_upload</i> 上传论文 </a>
+            <a class="mdl-navigation__link" href="{{ url_for('main.upload') }}"><i class="material-icons">file_upload</i> 上传论文 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">playlist_add_check</i> 查看论文 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">format_list_numbered</i> 查询结果 </a>
             <a class="mdl-navigation__link" href="{{ url_for('auth.contact') }}"><i class="material-icons">contact_mail</i> 在线留言 </a>        

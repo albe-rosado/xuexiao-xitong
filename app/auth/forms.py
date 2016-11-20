@@ -1,12 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField
-from wtforms.validators import Required, Length, Email, Regexp, EqualTo
+from wtforms.validators import Required, Optional, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
-from ..models import User
-
+from ..models import User, Member
 
 class LoginForm(FlaskForm):
-    email = StringField('用户名', validators=[Required(), Length(1, 64), Email()])
+    email = StringField('邮箱', validators=[Required(), Length(1, 64), Email()])
     password = PasswordField('密码', validators=[Required()])
     remember_me = BooleanField('下次自动登录')    
     submit = SubmitField('登录')
@@ -61,8 +60,7 @@ class PasswordResetForm(FlaskForm):
 
 
 class ChangeEmailForm(FlaskForm):
-    email = StringField('新邮箱', validators=[Required(), Length(1, 64),
-                                                 Email()])
+    email = StringField('新邮箱', validators=[Required(), Length(1, 64), Email()])
     password = PasswordField('密码', validators=[Required()])
     submit = SubmitField('修改密码')
 
@@ -71,7 +69,43 @@ class ChangeEmailForm(FlaskForm):
             raise ValidationError('邮箱已被注册')
 
 class ContactForm(FlaskForm):
-    purpose = SelectField('留言类型', choices=[('aim','赛事信息'), ('msn','参赛咨询'), ('msn1','队员信息填写'),\
-     ('msn2','审核与缴费'), ('msn3','试题下载'), ('msn4','论文提交'), ('msn5','证书及奖金领取'), ('msn6','其它')])
+    purpose = SelectField('留言类型', choices=[('赛事信息','赛事信息'), ('赛事信息','参赛咨询'), ('队员信息填写','队员信息填写'),\
+     ('审核与缴费','审核与缴费'), ('试题下载','试题下载'), ('论文提交','论文提交'), ('证书及奖金领取','证书及奖金领取'), ('其它','其它')])
     message = TextAreaField('内容', validators=[Required()])
     submit = SubmitField('提交')
+
+class PaymentForm(FlaskForm):
+    amount = StringField('RMB', validators=[Required()])
+    submit = SubmitField('缴费')
+
+class MemberRegistrationForm(FlaskForm):
+    phone = StringField('联系电话', validators=[Required()])
+    email = StringField('联系邮箱', validators=[Required(), Length(1, 64), Email()])
+    name = StringField('真实姓名', validators=[Required()])
+    student_number = StringField('学生号', validators=[Required()])
+    sex = SelectField('性别', choices=[('男','男'), ('女', '女')])
+    ethnic = StringField('民族', validators=[Required()])
+    province = StringField('省份', validators=[Required()])
+    school = StringField('学校', validators=[Required()])
+    student_type = StringField('学生类型', validators=[Required()])
+    discipline = StringField('专业', validators=[Required()])
+    specialty = StringField('研究方向', validators=[Optional()])
+    grade =StringField('年级', validators=[Required()])
+    faculty = StringField('院系名称', validators=[Required()])
+    grad_time = StringField('预期毕业时间', validators=[Required()])
+    teacher_assigned = StringField('本队指导老师', validators=[Optional()])
+    id_type = SelectField('证件', choices=[('身份证','身份证'), ('护照', '护照')])
+    id_number = StringField('证件号', validators=[Required()])
+    address = StringField('通讯地址', validators=[Required()])
+    zip_code = StringField('邮编', validators=[Required()])
+    submit = SubmitField('提交信息')
+    
+    def validate_email(self, field):
+        if Member.query.filter_by(email=field.data).first():
+            raise ValidationError('邮箱已被注册')
+    def validate_phone(self, field):
+        if Member.query.filter_by(email=field.data).first():
+            raise ValidationError('电话号已被注册')
+    def validate_id(self, field):
+        if Member.query.filter_by(email=field.data).first():
+            raise ValidationError('身份证号已被注册')

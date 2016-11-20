@@ -1,0 +1,98 @@
+{% extends "dashboard/dashboard_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col" style="padding: 20px; display: {{ visible }};">
+    <span style="color:red;">
+        注意：请填写参赛队员全部信息后单击“提交信息”按钮保存！
+    </span>
+    <br>
+    {{ wtf.quick_form(form) }}        
+</div>        
+
+{% for member in members %}
+<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col" style="padding: 20px;">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+
+        <tbody>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.phone.label}}</td>
+                <td>{{ member.phone }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.email.label}}</td>
+                <td>{{ member.email }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.student_number.label}}</td>
+                <td>{{ member.student_number }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.sex.label}}</td>
+                <td>{{ member.sex }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.ethnic.label}}</td>
+                <td>{{ member.ethnic }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.province.label}}</td>
+                <td>{{ member.province }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.school.label}}</td>
+                <td>{{ member.school }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.student_type.label}}</td>
+                <td>{{ member.student_type }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.discipline.label}}</td>
+                <td>{{ member.discipline }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.specialty.label}}</td>
+                <td>{{ member.specialty }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.grade.label}}</td>
+                <td>{{ member.grade }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.faculty.label}}</td>
+                <td>{{ member.faculty }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.grad_time.label}}</td>
+                <td>{{ member.grad_time }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.teacher_assigned.label}}</td>
+                <td>{{ member.teacher_assigned }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.id_type.label}}</td>
+                <td>{{ member.id_type }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.id_number.label}}</td>
+                <td>{{ member.id_number }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.address.label}}</td>
+                <td>{{ member.address }}</td>      
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{form.zip_code.label}}</td>
+                <td>{{ member.zip_code }}</td>      
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+{% endfor %}
+
+
+{% endblock %}

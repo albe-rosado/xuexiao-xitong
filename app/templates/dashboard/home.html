@@ -23,7 +23,11 @@
         <h2 class="mdl-card__title-text">资料管理</h2>
     </div>
     <div class="mdl-card__supporting-text">
-        资料： 【【 status of the document 】】
+        {% if site_data['registered']: %}
+            资料： <span style="color:green;"> 已审核通过 </span>
+        {% else: %}            
+            资料： <span style="color:red;"> 资料上报未完成 </span>
+        {%endif%}
     </div>
     <div class="mdl-card__actions mdl-card--border">
         <a href="/auth/change-password" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -32,7 +36,7 @@
         <a href="/auth/change-email" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
             邮箱
         </a>
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        <a href="{{url_for('main.team')}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
             编辑资料
         </a>
     </div>
@@ -42,7 +46,12 @@
         <h2 class="mdl-card__title-text">网上缴费</h2>
     </div>
     <div class="mdl-card__supporting-text">
-        参赛队 [[status]] 缴费方为：参赛队缴费 支付时间为：2016-09-08 17:40:24
+        {% if site_data['payed'] == 'False': %}
+            参赛队 <span style="color:red;"> 未缴费 </span> 
+        {% else: %}
+            参赛队 <span style="color:green;"> 已缴费 </span>
+        {%endif%}         
+        缴费方为：参赛队缴费 支付时间为： {{ site_data['payed'] }}
     </div>
     <div class="mdl-card__actions mdl-card--border">
         <a href="/dashboard/pay" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -66,7 +75,7 @@
                         下载试题
                     </button>
                 </td>
-                <td style="width: 800px;padding: 3px;"> 下载试题时间：2016-09-15 08:00:00 至 2016-09-20 12:00:00 </td>             
+                <td style="width: 800px;padding: 3px;"> 下载试题时间：{{ site_data['download_questions_time'][0] }} 至 {{site_data['download_questions_time'][1]}} </td>             
             </tr>
             <tr>
                 <td style="width: 150px; padding: 3px;">
@@ -74,7 +83,7 @@
                         试题解压码
                     </button>
                 </td>
-                <td style="width: 800px;padding: 3px;"> 获取试题解压码时间：2016-09-16 08:00:00 至 2016-09-20 12:00:00 尚未公布 </td> 
+                <td style="width: 800px;padding: 3px;"> 获取试题解压码时间：{{ site_data['zip_password_time'][0] }} 至 {{ site_data['zip_password_time'][1] }} 尚未公布 </td> 
             </tr>
             <tr>
                 <td style="width: 150px; padding: 3px;">
@@ -82,7 +91,7 @@
                         提交识别码
                     </button>
                 </td>
-                <td style="width: 800px;padding: 3px;"> 上传识别码时间：2016-09-16 08:00:00 至 2016-09-20 12:06:00 </td> 
+                <td style="width: 800px;padding: 3px;"> 上传识别码时间：{{ site_data['code_submission_time'][0] }} 至 {{ site_data['code_submission_time'][1] }} </td> 
             </tr>
             <tr>
                 <td style="width: 150px; padding: 3px;">
@@ -90,7 +99,7 @@
                         上传论文
                     </button>
                 </td>
-                <td style="width: 800px;padding: 3px;"> 上传论文时间：2016-09-20 12:30:00 至 2016-09-23 12:00:00 </td> 
+                <td style="width: 800px;padding: 3px;"> 上传论文时间： {{ site_data['solution_upload_time'][0] }} 至 {{ site_data['solution_upload_time'][1] }} </td> 
             </tr>
             <tr>
                 <td style="width: 150px; padding: 3px;">
@@ -98,7 +107,7 @@
                         查看论文
                     </button>
                 </td>
-                <td style="width: 800px;padding: 3px;"> 查看论文时间：2016-11-16 12:00:00 至 2016-11-26 12:00:00 </td> 
+                <td style="width: 800px;padding: 3px;"> 查看论文时间： {{ site_data['check_solution_time'][0] }} 至 {{ site_data['check_solution_time'][1] }} </td> 
             </tr>
         </tbody>
 </table>
