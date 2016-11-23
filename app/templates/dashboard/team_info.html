@@ -12,9 +12,7 @@
 </div>        
 
 {% for member in members %}
-<div class="demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col" style="padding: 20px;">
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-
+    <table class="mdl-data-table mdl-js-data-table demo-card-square mdl-cell mdl-cell--6-col mdl-shadow--2dp" style="padding: 20px;">
         <tbody>
             <tr>
                 <td class="mdl-data-table__cell--non-numeric">{{form.phone.label}}</td>
@@ -91,7 +89,6 @@
         </tbody>
     </table>
 
-</div>
 {% endfor %}
 
 

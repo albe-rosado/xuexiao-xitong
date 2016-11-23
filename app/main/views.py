@@ -120,6 +120,23 @@ def upload():
 
 
 
+
+@main.route('/dashboard/download', methods=['GET', 'POST'])
+@login_required
+def download_questions():
+    template_name='下载试题'
+    admin_settings = GetFile('admin_settings.json').Read()    
+    site_data = {
+        "doc_password": admin_settings['doc_password'],
+        "zip_password_time":admin_settings['zip_password_time']        
+    }
+    return render_template('dashboard/download.html', site_data=site_data,template_name=template_name)
+
+
+
+
+
+
 # A download endpoint, to download the file
 
 @main.route('/download/<path:object_name>')

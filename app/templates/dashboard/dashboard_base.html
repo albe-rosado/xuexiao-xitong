@@ -49,7 +49,7 @@
             <a class="mdl-navigation__link" href="{{ url_for('main.dashboard') }}"><i class="material-icons">home</i> 选手首页 </a>
             <a class="mdl-navigation__link" href="{{ url_for('main.pay') }}"><i class="material-icons">payment</i> 网上缴费 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">receipt</i> 订单管理 </a>
-            <a class="mdl-navigation__link" href=""><i class="material-icons">file_download</i> 下载试题 </a>
+            <a class="mdl-navigation__link" href="{{url_for('main.download_questions')}}"><i class="material-icons">file_download</i> 下载试题 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">fingerprint</i> 提交识别码 </a>
             <a class="mdl-navigation__link" href="{{ url_for('main.upload') }}"><i class="material-icons">file_upload</i> 上传论文 </a>
             <a class="mdl-navigation__link" href=""><i class="material-icons">playlist_add_check</i> 查看论文 </a>

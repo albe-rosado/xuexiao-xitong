@@ -1,0 +1,38 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% block page_content %}
+<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--8-col">
+	 <div class="mdl-card__title">
+	     <h2 class="mdl-card__title-text">竞赛发布</h2>
+  	</div>
+  	<table>
+        <tbody>
+            <tr>
+                <td style="width: 200px; padding: 15px;">
+                    下载地址（本体）：
+                </td>
+                <td> 
+                    <a href="{{ url_for('main.download', object_name='questions_dowload_sample.pdf') }}" style="padding: 15px;padding-left:40px;"> 下载试题 </a>
+                </td>                             
+            </tr>
+            <tr>
+                <td style="width: 200px; padding: 15px;">
+                    试题解压密码 ：
+                </td>
+                <td> 
+                    <p style="padding: 15px;padding-left:10px;"> 请在答题时间 {{ site_data['zip_password_time'][0] }} 至 {{ site_data['zip_password_time'][1] }} 内查看密码 </p>
+                </td>                             
+            </tr>
+            <tr>
+                <td style="width: 200px; padding: 15px;">
+                    检验码 ：
+                </td>
+                <td> 
+                    <label style="padding: 15px;padding-left:10px;"> {{site_data['doc_password']}} </label>
+                </td>                             
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
