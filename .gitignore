@@ -8,6 +8,4 @@ app/config.py
 app/files
 app/__init__.pyc
 .vscode
-
-
 venv
