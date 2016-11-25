@@ -1,9 +1,10 @@
 from flask import render_template, redirect, request, url_for, flash, abort
 from flask_login import login_user, logout_user, login_required, current_user
+from werkzeug.utils import secure_filename
 from time import gmtime, strftime
 from . import main
 from ..auth.forms import LoginForm, ChangePasswordForm, ChangeEmailForm, PaymentForm, \
-    MemberRegistrationForm, MD5Form
+    MemberRegistrationForm, MD5Form, UploadForm
 from ..models import User, Member
 from .. import db
 from ..json_reader import GetFile
@@ -118,7 +119,18 @@ def team():
 @login_required
 def upload():
     template_name='上传论文'
-    return render_template('dashboard/upload.html', template_name=template_name)
+    form = UploadForm()
+    if request.method == 'POST':
+        if not form.validate_filename(form):
+            flash('文件名不正确')
+            redirect(url_for('main.upload'))
+        if form.validate_on_submit() and form.validate_filename(form) :
+            filename = secure_filename(form.file.data.filename)           
+            form.file.data.save('uploads/' + filename)
+            flash('上传完成')
+    return render_template('dashboard/upload.html', form=form, template_name=template_name)
+
+
 
 
 
@@ -138,7 +150,7 @@ def download_questions():
 
 
 
-
+# MD5 code submission
 @main.route('/dashboard/md5', methods=['GET', 'POST'])
 @login_required
 def md5():
@@ -168,7 +180,6 @@ def md5():
 
 
 # A download endpoint, to download the file
-
 @main.route('/download/<path:object_name>')
 @login_required
 def download(object_name):

@@ -1,5 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField
+from flask_login import current_user
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,\
+                     SelectField, TextAreaField
 from wtforms.validators import Required, Optional, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
 from ..models import User, Member
@@ -116,6 +119,8 @@ class MemberRegistrationForm(FlaskForm):
             raise ValidationError('身份证号已被注册')
 
 
+
+
 class MD5Form(FlaskForm):
     md5_code = StringField('识别码', validators=[Required()])
     submit = SubmitField('提交信息')
@@ -123,7 +128,24 @@ class MD5Form(FlaskForm):
     def reset(self):
         data = MultiDict([ ('csrf', self.generate_csrf_token() ) ])
         self.process(data)
-        
+
+
+
+
+
+class UploadForm(FlaskForm):
+    
+    file = FileField('上传论文', validators = [ \
+        FileRequired(),\
+        FileAllowed(['pdf'], '只允许PDF文件')
+        ])
+    question_number = SelectField('试题号', choices=[('A','A'), ('B', 'B'), ('C', 'C'),\
+     ('D', 'D'), ('E', 'E')])    
+    submit = SubmitField('上传')
+    
+    def validate_filename(self, field):
+        if field.file.data.filename == str(field.question_number.data)+str(current_user.id)+'.pdf':
+            return True      
 
 
 

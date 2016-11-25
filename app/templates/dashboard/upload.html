@@ -1,7 +1,20 @@
 {% extends "dashboard/dashboard_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
 
 {% block page_content %}
 
-<p> Document upload page </p>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col">
+    <span style="color:red; padding: 15px;">
+        文件名应该为： {试题号}+{队号}.pdf    例如： AK101.pdf
+    </span>
+    <br>
+    <div style="padding: 15px;">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+
+
+
 
 {% endblock  %}
