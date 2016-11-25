@@ -2,7 +2,8 @@ from flask import render_template, redirect, request, url_for, flash, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from time import gmtime, strftime
 from . import main
-from ..auth.forms import LoginForm, ChangePasswordForm, ChangeEmailForm, PaymentForm, MemberRegistrationForm
+from ..auth.forms import LoginForm, ChangePasswordForm, ChangeEmailForm, PaymentForm, \
+    MemberRegistrationForm, MD5Form
 from ..models import User, Member
 from .. import db
 from ..json_reader import GetFile
@@ -17,7 +18,7 @@ def index():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or url_for('main.index'))
+            return redirect(request.args.get('next') or url_for('main.dashboard'))
         flash('Invalid username or password.')
     return render_template('index.html', form=form)
 
@@ -112,6 +113,7 @@ def team():
 
 
 
+# Upload Solutions
 @main.route('/dashboard/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
@@ -120,7 +122,7 @@ def upload():
 
 
 
-
+# Download Questions
 @main.route('/dashboard/download', methods=['GET', 'POST'])
 @login_required
 def download_questions():
@@ -131,6 +133,34 @@ def download_questions():
         "zip_password_time":admin_settings['zip_password_time']        
     }
     return render_template('dashboard/download.html', site_data=site_data,template_name=template_name)
+
+
+
+
+
+
+@main.route('/dashboard/md5', methods=['GET', 'POST'])
+@login_required
+def md5():
+    template_name='提交识别码'
+    form = MD5Form()
+    md5_status = {
+        "actual": current_user.md5_code,
+        "code_submission_time": current_user.md5_code_date
+    }
+    if md5_status['actual'] != None:
+        form.submit.label.text = '重新提交识别码'
+
+    if request.method == "POST":
+        if form.validate_on_submit():
+            current_user.md5_code = form.md5_code.data
+            current_user.md5_code_date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+            db.session.add(current_user)
+            flash('识别码提交成功！')
+            form.reset()
+            redirect(url_for('main.md5'))
+    # form.submit.label.text = 'asd'
+    return render_template('dashboard/md5.html', form=form, md5_status=md5_status,template_name=template_name)
 
 
 

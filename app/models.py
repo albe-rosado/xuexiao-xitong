@@ -14,6 +14,8 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     fee_payed = db.Column(db.String(64), default='False')
     team_registered = db.Column(db.Boolean, default=False)
+    md5_code = db.Column(db.String(256))
+    md5_code_date = db.Column(db.String(256))
     role = db.Column(db.String(64), default='team')
 
     @property

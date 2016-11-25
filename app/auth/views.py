@@ -4,7 +4,6 @@ from . import auth
 from .. import db
 from ..models import User
 from ..email import send_email
-
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
     PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm,\
     ContactForm 
@@ -26,9 +25,9 @@ def unconfirmed():
     return render_template('auth/unconfirmed.html')
 
 
-@auth.route('/login')
-def login():
-    return redirect(url_for('main.index'))
+# @auth.route('/login')
+# def login():
+#     return redirect(url_for('main.index'))
 
 
 @auth.route('/logout')

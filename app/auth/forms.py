@@ -3,6 +3,9 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Selec
 from wtforms.validators import Required, Optional, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
 from ..models import User, Member
+from werkzeug.datastructures import MultiDict
+
+
 
 class LoginForm(FlaskForm):
     email = StringField('邮箱', validators=[Required(), Length(1, 64), Email()])
@@ -69,8 +72,10 @@ class ChangeEmailForm(FlaskForm):
             raise ValidationError('邮箱已被注册')
 
 class ContactForm(FlaskForm):
-    purpose = SelectField('留言类型', choices=[('赛事信息','赛事信息'), ('赛事信息','参赛咨询'), ('队员信息填写','队员信息填写'),\
-     ('审核与缴费','审核与缴费'), ('试题下载','试题下载'), ('论文提交','论文提交'), ('证书及奖金领取','证书及奖金领取'), ('其它','其它')])
+    purpose = SelectField('留言类型', choices=[('赛事信息','赛事信息'),\
+     ('赛事信息','参赛咨询'), ('队员信息填写','队员信息填写'),\
+     ('审核与缴费','审核与缴费'), ('试题下载','试题下载'), ('论文提交','论文提交'),\
+      ('证书及奖金领取','证书及奖金领取'), ('其它','其它')])
     message = TextAreaField('内容', validators=[Required()])
     submit = SubmitField('提交')
 
@@ -109,3 +114,16 @@ class MemberRegistrationForm(FlaskForm):
     def validate_id(self, field):
         if Member.query.filter_by(email=field.data).first():
             raise ValidationError('身份证号已被注册')
+
+
+class MD5Form(FlaskForm):
+    md5_code = StringField('识别码', validators=[Required()])
+    submit = SubmitField('提交信息')
+    
+    def reset(self):
+        data = MultiDict([ ('csrf', self.generate_csrf_token() ) ])
+        self.process(data)
+        
+
+
+

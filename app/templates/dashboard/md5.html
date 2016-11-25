@@ -1,0 +1,38 @@
+{% extends "dashboard/dashboard_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+	
+<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col">
+
+    <div style="padding: 15px;">
+        {{ wtf.quick_form(form) }}
+    </div>
+    <br>
+    <div style="padding: 15px;">
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 200px; padding: 15px;">
+                        识别码：
+                    </td>
+                    <td> 
+                        {{ md5_status['actual'] }}
+                    </td>                             
+                </tr>
+                <tr>
+                    <td style="width: 200px; padding: 15px;">
+                        时间：
+                    </td>
+                    <td> 
+                        {{ md5_status['code_submission_time'] }}
+                    </td>                             
+                </tr>            
+            </tbody>
+        </table>       
+    </div>
+</div>	
+
+
+{% endblock %}
