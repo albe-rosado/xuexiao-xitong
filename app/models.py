@@ -27,6 +27,7 @@ class User(UserMixin, db.Model):
         self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password):
+        
         return check_password_hash(self.password_hash, password)
 
     def generate_confirmation_token(self, expiration=3600):
@@ -91,6 +92,10 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+
+
+
+
 class Member(db.Model):
     __tablename__ = 'members'    
     group_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -113,3 +118,5 @@ class Member(db.Model):
     id_number = db.Column(db.String(64), unique=True, index=True, primary_key=True)
     address = db.Column(db.String(164))
     zip_code = db.Column(db.String(164))
+    def __repr__(self):
+        return '<Member %r>' % self.username

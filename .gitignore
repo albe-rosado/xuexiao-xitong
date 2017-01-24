@@ -1,11 +1,11 @@
 app/main/__pycache__
 app/__pycache__
 .idea
+.vscode
 *.pyc
 data.sqlite
-config.py
 app/config.py
 app/files
 app/__init__.pyc
 .vscode
-venv
+env

@@ -3,7 +3,7 @@ from flask_login import current_user
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, PasswordField, BooleanField, SubmitField,\
                      SelectField, TextAreaField
-from wtforms.validators import Required, Optional, Length, Email, Regexp, EqualTo
+from wtforms.validators import Required, Optional, Length, Email, Regexp, EqualTo, NumberRange
 from wtforms import ValidationError
 from ..models import User, Member
 from werkzeug.datastructures import MultiDict
@@ -83,7 +83,7 @@ class ContactForm(FlaskForm):
     submit = SubmitField('提交')
 
 class PaymentForm(FlaskForm):
-    amount = StringField('RMB', validators=[Required()])
+    amount = StringField('RMB', validators=[Required(), NumberRange()])
     submit = SubmitField('缴费')
 
 class MemberRegistrationForm(FlaskForm):
@@ -133,8 +133,7 @@ class MD5Form(FlaskForm):
 
 
 
-class UploadForm(FlaskForm):
-    
+class UploadForm(FlaskForm):    
     file = FileField('上传论文', validators = [ \
         FileRequired(),\
         FileAllowed(['pdf'], '只允许PDF文件')
