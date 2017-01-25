@@ -18,7 +18,7 @@ APP_ADMIN = 'ADMIN'
         # 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
 # temporary db URI (Dev)
-SQLALCHEMY_DATABASE_URI = 'postgres://uvofwqzb:NzHObsMLOy-yfEnLs2WLaTYcU57FwjlD@elmer.db.elephantsql.com:5432/uvofwqzb'
+SQLALCHEMY_DATABASE_URI = 'postgres://uvofwqzb:2wq6ypPQqwdbPvpyhyeRRWY4Et5tUMOg@elmer.db.elephantsql.com:5432/uvofwqzb'
 
 
 # Storage Config
