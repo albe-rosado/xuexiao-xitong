@@ -7,9 +7,9 @@ IMNU Postgraduate Mathematics Competition Papers Submission System is a web app 
 ### Tech
 The app was built with Flask, and make use of:
 * [Material Theme](https://getmdl.io/)
-* [Twitter Bootstrap](https://getbootstrap.com/) - great UI boilerplate for modern web apps
-* [Flask-Turbolinks](https://github.com/lepture/flask-turbolinks) - for the dashboard SPA feeling.
-* [Flask-Cloudy](https://pypi.python.org/pypi/Flask-Cloudy) - standalone library to upload and save files on S3, Google storage or other Cloud Storages.
+* [Twitter Bootstrap](https://getbootstrap.com/) - Great UI boilerplate for modern web apps
+* [Flask-Turbolinks](https://github.com/lepture/flask-turbolinks) - Turbolinks for Flask
+* [Flask-Cloudy](https://pypi.python.org/pypi/Flask-Cloudy) - Standalone library to upload and save files on S3, Google storage or other Cloud Storages.
 
 
 ### Installation
