@@ -1,7 +1,7 @@
 # IMNU Postgraduate Mathematics Competition Papers Submission System
 
 
-IMNU Postgraduate Mathematics Competition Papers Submission System is a web app that provides the tools for hosting competitions like [China's National Mathematical Modeling Competition](http://www.mcm.edu.cn/) (中国国家数学建模比赛). The interface is in Chinese, as it was made for chinese collegue students.
+IMNU Postgraduate Mathematics Competition Papers Submission System is a web app that provides the tools for hosting competitions like [China's National Mathematical Modeling Competition](http://www.mcm.edu.cn/) (中国国家数学建模比赛). The interface is in Chinese, as it was made for chinese collegue students. For a better idea about the uses of the app , take a look to this [document](https://pan.baidu.com/s/1kVE00cv).
 
 
 ### Tech
